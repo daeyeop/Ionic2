@@ -1,31 +1,30 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Events, LoadingController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { ListPage } from '../pages/list/list';
 
 import { MyTeamsPage, TournamentsPage } from '../pages/pages';
+import { HttpModule } from '@angular/http';
+
+import { EliteApi } from '../shared/shared';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+    providers: [
+    EliteApi,
+    HttpModule
+  ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = MyTeamsPage;
 
-  pages: Array<{title: string, component: any}>;
-
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'MyTeamPage', component: MyTeamsPage },
-      { title: 'List', component: ListPage }
-    ];
 
   }
 

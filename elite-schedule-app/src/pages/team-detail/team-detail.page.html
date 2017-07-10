@@ -4,7 +4,9 @@
 </ion-header>
 
 <ion-content>
-    <h1>Team detail!</h1>
-    <h2>{{team.name}}</h2>
-    <button ion-button (click)="goHome()">Go Home</button>
+    <ion-list>
+        <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)">
+            {{game.opponent}}
+        </ion-item>
+    </ion-list>
 </ion-content>
