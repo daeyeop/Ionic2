@@ -8,25 +8,35 @@ import { ListPage } from '../pages/list/list';
 import { MyTeamsPage, TournamentsPage } from '../pages/pages';
 import { HttpModule } from '@angular/http';
 
-import { EliteApi } from '../shared/shared';
+import { EliteApi, UserSettings } from '../shared/shared';
 
 
 @Component({
   templateUrl: 'app.html',
     providers: [
     EliteApi,
+    UserSettings,
     HttpModule
   ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  favoriteTeams: any[];
   rootPage: any = MyTeamsPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public userSettings: UserSettings,
+     public statusBar: StatusBar,
+      public splashScreen: SplashScreen) {
     this.initializeApp();
 
   }
+  
+    refreshFavorites() {
+    this.favoriteTeams = this.userSettings.getAllFavorites();
+  }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
